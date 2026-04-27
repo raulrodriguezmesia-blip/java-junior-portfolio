@@ -3,6 +3,7 @@ package com.raulrodriguez.portfolio.service;
 import com.raulrodriguez.portfolio.model.Usuario;
 import org.junit.jupiter.api.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -13,8 +14,12 @@ class UsuarioServiceTest {
     private UsuarioService service;
 
     @BeforeEach
-    void setUp() {
-        // Usamos una instancia nueva para cada test
+    void setUp() throws IOException {
+        // Limpiar archivo de datos antes de cada test
+        File f = new File("data/usuarios.json");
+        if (f.exists()) {
+            f.delete();
+        }
         service = new UsuarioService();
     }
 
@@ -28,7 +33,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Crear y buscar usuario por ID")
     void testCrearYBuscar() {
-        Usuario nuevo = new Usuario(null, "Juan Pérez", "juan@email.com", 30);
+        Usuario nuevo = new Usuario(0, "Juan Pérez", "juan@email.com", 30);
         Usuario creado = service.crear(nuevo);
 
         assertNotNull(creado.getId(), "El ID debería ser asignado automáticamente");
@@ -44,7 +49,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Actualizar usuario existente")
     void testActualizar() {
-        Usuario u1 = service.crear(new Usuario(null, "María", "maria@email.com", 25));
+        Usuario u1 = service.crear(new Usuario(0, "María", "maria@email.com", 25));
         Usuario actualizado = new Usuario(u1.getId(), "María García", "maria.garcia@email.com", 26);
 
         boolean result = service.actualizar(actualizado);
@@ -58,7 +63,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Eliminar usuario")
     void testEliminar() {
-        Usuario creado = service.crear(new Usuario(null, "Pedro", "pedro@email.com", 40));
+        Usuario creado = service.crear(new Usuario(0, "Pedro", "pedro@email.com", 40));
         int id = creado.getId();
 
         boolean result = service.eliminar(id);
@@ -71,8 +76,8 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Buscar por nombre (búsqueda parcial)")
     void testBuscarPorNombre() {
-        service.crear(new Usuario(null, "Ana López", "ana@email.com", 22));
-        service.crear(new Usuario(null, "Luis Andrés", "luis@email.com", 35));
+        service.crear(new Usuario(0, "Ana López", "ana@email.com", 22));
+        service.crear(new Usuario(0, "Luis Andrés", "luis@email.com", 35));
 
         List<Usuario> resultados = service.buscarPorNombre("ana");
         assertEquals(1, resultados.size());
@@ -82,7 +87,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Validar email inválido lanza excepción")
     void testValidarEmailInvalido() {
-        Usuario invalido = new Usuario(null, "Test", "email-sin-arroba", 30);
+        Usuario invalido = new Usuario(0, "Test", "email-sin-arroba", 30);
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,
@@ -95,7 +100,7 @@ class UsuarioServiceTest {
     @Test
     @DisplayName("Validar edad negativa lanza excepción")
     void testValidarEdadNegativa() {
-        Usuario invalido = new Usuario(null, "Test", "test@email.com", -5);
+        Usuario invalido = new Usuario(0, "Test", "test@email.com", -5);
 
         IllegalArgumentException exception = assertThrows(
                 IllegalArgumentException.class,

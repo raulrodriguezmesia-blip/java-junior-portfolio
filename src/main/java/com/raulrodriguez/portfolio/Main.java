@@ -107,7 +107,7 @@ public class Main {
         String email = leerTexto("Email: ");
         int edad = leerEntero("Edad: ");
 
-        Usuario usuario = new Usuario(null, nombre, email, edad);
+        Usuario usuario = new Usuario(0, nombre, email, edad);
         Usuario creado = usuarioService.crear(usuario);
         System.out.println("✅ Usuario creado con ID: " + creado.getId());
     }
@@ -157,6 +157,7 @@ public class Main {
         int id = leerEntero("ID de usuario a importar (1-10): ");
         try {
             Usuario usuario = apiService.obtenerUsuarioDesdeAPI(id);
+            usuario.setId(0); // Reset ID para asignación automática
             Usuario creado = usuarioService.crear(usuario);
             System.out.println("✅ Usuario importado de API: " + creado);
         } catch (Exception e) {
@@ -171,6 +172,7 @@ public class Main {
         int importados = 0;
         for (Usuario u : usuariosAPI) {
             try {
+                u.setId(0); // Reset ID para asignación automática
                 usuarioService.crear(u);
                 importados++;
             } catch (Exception e) {

@@ -2,6 +2,7 @@ package com.raulrodriguez.portfolio.service;
 
 import com.raulrodriguez.portfolio.model.Usuario;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.io.IOException;
 import java.net.URI;
@@ -79,12 +80,12 @@ public class ApiService {
     }
 
     // Clase auxiliar para deserializar JSON de la API
+    @JsonIgnoreProperties(ignoreUnknown = true)
     private static class JsonUsuario {
         private int id;
         private String name;
         private String email;
-        private String address; // Ignorado
-        private String phone;  // Ignorado
+        // Campos ignorados: address, phone, username, website, company, etc.
 
         // Getters
         public int getId() { return id; }
