@@ -16,11 +16,10 @@ class ArchivoRepositoryTest {
     @BeforeEach
     void setUp() throws IOException {
         repo = new ArchivoRepository();
-        // Limpiar archivo de test antes de cada prueba
-        File f = new File(TEST_FILE);
-        if (f.exists()) {
-            f.delete();
-        }
+        // Limpiar TODOS los archivos de persistencia antes de cada test
+        new File("data/usuarios.json").delete();
+        new File("data/usuarios.txt").delete();
+        new File("data/usuarios.csv").delete();
     }
 
     @Test

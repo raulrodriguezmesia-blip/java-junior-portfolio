@@ -121,17 +121,35 @@ Tests implementados:
 
 ## 💾 Estructura de Datos
 
-### Archivo JSON (`data/usuarios.json`)
-```json
-[
-  {
-    "id": 1,
-    "nombre": "Juan Pérez",
-    "email": "juan@email.com",
-    "edad": 30
-  }
-]
+### Archivos de persistencia (múltiples formatos)
+
+La aplicación guarda automáticamente en **tres formatos** al mismo tiempo:
+
 ```
+data/
+├── usuarios.json   # Formato JSON (serializado con Jackson)
+├── usuarios.txt    # Formato texto plano (pipe-separated)
+└── usuarios.csv    # Formato CSV (comma-separated)
+```
+
+**Formato TXT** (`usuarios.txt`):
+```
+# Formato: id|nombre|email|edad
+1|Juan Perez|juan@email.com|30
+2|Maria Garcia|maria@email.com|25
+```
+
+**Formato CSV** (`usuarios.csv`):
+```csv
+id,nombre,email,edad
+1,Juan Perez,juan@email.com,30
+2,Maria Garcia,maria@email.com,25
+```
+
+**Ventajas**:
+- ✅ JSON: fácil deserialización con Jackson
+- ✅ TXT: legible por humanos, simple parseo con `split("|")`
+- ✅ CSV: compatible con Excel, Google Sheets
 
 ### API Externa
 - **Endpoint**: `https://jsonplaceholder.typicode.com/users/{id}`

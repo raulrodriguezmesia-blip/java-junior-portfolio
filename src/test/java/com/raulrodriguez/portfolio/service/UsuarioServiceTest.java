@@ -15,11 +15,10 @@ class UsuarioServiceTest {
 
     @BeforeEach
     void setUp() throws IOException {
-        // Limpiar archivo de datos antes de cada test
-        File f = new File("data/usuarios.json");
-        if (f.exists()) {
-            f.delete();
-        }
+        // Limpiar TODOS los archivos de datos antes de cada test
+        new File("data/usuarios.json").delete();
+        new File("data/usuarios.txt").delete();
+        new File("data/usuarios.csv").delete();
         service = new UsuarioService();
     }
 

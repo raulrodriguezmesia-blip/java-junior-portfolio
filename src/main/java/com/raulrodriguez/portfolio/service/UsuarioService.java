@@ -21,7 +21,17 @@ public class UsuarioService {
 
     private void cargarDesdeArchivo() {
         try {
+            // Intentar cargar desde JSON primero
             List<Usuario> usuariosList = repositorio.cargarUsuarios();
+            if (usuariosList.isEmpty()) {
+                // Si JSON está vacío, intentar TXT
+                usuariosList = repositorio.cargarUsuariosTxt();
+            }
+            if (usuariosList.isEmpty()) {
+                // Si TXT está vacío, intentar CSV
+                usuariosList = repositorio.cargarUsuariosCsv();
+            }
+
             for (Usuario u : usuariosList) {
                 usuarios.put(u.getId(), u);
                 if (u.getId() >= nextId) {
