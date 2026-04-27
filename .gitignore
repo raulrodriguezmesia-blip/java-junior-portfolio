@@ -1,3 +1,21 @@
-"target/" 
-".idea/" 
-"*.iml" 
+# Archivos generados automáticamente
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# IDE
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Datos y logs
+data/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
