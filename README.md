@@ -1,5 +1,9 @@
 # Java Junior Portfolio
 
+![Java](https://img.shields.io/badge/Java-11%2B-orange)
+![License](https://img.shields.io/badge/License-MIT-blue)
+![Build](https://github.com/raulrodriguezmesia-blip/java-junior-portfolio/actions/workflows/ci.yml/badge.svg)
+
 Proyecto Mínimo Viable para desarrollador Java Junior. Aplicación de consola CRUD con persistencia en archivos y consumo de APIs REST.
 
 ---
