@@ -1,4 +1,4 @@
-# Java Junior Portfolio
+# Java Portfolio
 
 ![Java](https://img.shields.io/badge/Java-11%2B-orange)
 ![License](https://img.shields.io/badge/License-MIT-blue)
